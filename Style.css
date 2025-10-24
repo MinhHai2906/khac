@@ -1,0 +1,718 @@
+html {
+  scroll-behavior: smooth;/* cuộn trang mượt */
+}
+* {
+  margin: 0; /* Xóa khoảng cách mặc định bên ngoài của tất cả phần tử */
+  padding: 0; /* Xóa khoảng cách mặc định bên trong của tất cả phần tử */
+  box-sizing: border-box; /* Giúp tính toán kích thước phần tử bao gồm cả viền (border) và khoảng đệm (padding) */
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.intro-Background {
+   background-color: rgba(0, 0, 0, 0.753); /* Đặt màu nền đen trong suốt nhẹ (mức 0.753 giúp nhìn thấy nền mờ phía sau) */
+  background-size: cover; /* Ảnh nền (nếu có) sẽ được phóng to để bao phủ toàn bộ khung */
+  background-repeat: no-repeat; /* Không lặp lại ảnh nền */
+  background-position: center; /* Căn giữa ảnh nền */
+  background-attachment: fixed; /* Giữ ảnh nền cố định khi cuộn trang (hiệu ứng parallax nhẹ) */
+  margin: 0; /* Xóa khoảng cách ngoài của phần nền */
+  height: 100vh; /* Chiều cao của phần này bằng 100% chiều cao màn hình (viewport height) */
+  padding-top: 12vh; /* Tạo khoảng cách phía trên bằng 12% chiều cao màn hình — để nội dung không dính sát mép trên */
+  
+}
+
+/* MENU */
+.Menu .intro {
+  border: none;
+  margin-right: 12vw;        
+  font-size: 2.5vh;         
+  font-weight: bold;
+  box-shadow: none;
+  color: white;
+  cursor: pointer; /* Rơ vào có chuột*/
+}
+
+.Menu .intro:hover {
+  color: rgb(99, 200, 231);
+}
+
+.Menu {   
+ position: fixed;          /* Giữ thanh menu cố định ở một vị trí trên màn hình, dù người dùng cuộn trang */
+  top: 0;                   /* Cố định menu ở mép trên cùng của trang */
+  left: 0;                  /* Căn menu sát mép trái trình duyệt */
+  width: 100%;              /* Cho menu chiếm toàn bộ chiều rộng của trang */
+  z-index: 1000;            /* Đặt độ ưu tiên hiển thị cao, đảm bảo menu nằm trên các phần tử khác */
+  display: flex;            /* Dùng flexbox để sắp xếp các mục trong menu nằm ngang */
+  justify-content: center;  /* Căn giữa các mục trong menu theo chiều ngang */
+  list-style: none;         /* Bỏ dấu chấm tròn (mặc định của danh sách ul/li) */
+  color: whitesmoke;        /* Đặt màu chữ của menu là trắng nhạt */
+  margin-top: 2vh;          /* Tạo khoảng cách phía trên menu (2% chiều cao màn hình) */
+  padding: 2vh;             /* Thêm khoảng đệm bên trong menu để các mục không dính sát mép */
+  gap: 1vw;                 /* Tạo khoảng cách ngang giữa các mục menu (1% chiều rộng màn hình) */
+  border-radius: 1vw;       /* Bo tròn nhẹ các góc của thanh menu */
+  box-shadow: none;         /* Không có bóng đổ (hiện tại tắt bóng) */
+  
+}
+.Menu a{
+  text-decoration: none; /* xóa gạch chân khi liên kết */
+  color: inherit; /* giữ màu chữ */
+}
+
+li:not(.intro) {
+  padding: 1vh 2vw;
+  cursor: pointer;
+  margin-left: 5vw;
+  font-size: 2vh;
+}
+
+.Menu li {
+  padding: 0.5vh 1vw; /* Tạo khoảng đệm bên trong mỗi mục menu: 0.5% chiều cao màn hình ở trên/dưới, 1% chiều rộng màn hình ở trái/phải */
+  width: fit-content; /* Chiều rộng tự động vừa đủ với nội dung bên trong (không dư thừa) */
+  border: 0.2vh solid rgb(122, 119, 133); /* Viền mảnh xung quanh mỗi mục menu, màu xám nhạt */
+  border-radius: 0.5vw; /* Bo tròn nhẹ các góc của mỗi mục menu */
+  display: inline-block; /* Hiển thị mỗi mục menu theo hàng ngang, nhưng vẫn có thể chỉnh kích thước */
+  transform: scale(1.5, 1); /* Kéo giãn mục menu theo trục X (ngang) 1.5 lần, trục Y (dọc) giữ nguyên → giúp chữ trải rộng hơn */
+  filter: drop-shadow(1px 1px 20px rgb(199, 199, 211)); /* Tạo bóng sáng nhẹ phía sau mục menu (hiệu ứng phát sáng mờ) */
+  transform-origin: left center; /* Điểm gốc của hiệu ứng transform nằm ở giữa cạnh trái → giúp hiệu ứng phóng to co dãn từ bên trái ra */
+  transition: all 0.3s ease; /* Tạo hiệu ứng chuyển động mượt (0.3 giây) khi hover chuột hoặc thay đổi trạng thái */
+  
+}
+
+.Menu li:not(.intro):hover {
+  background-color: rgba(11, 129, 119, 0);
+  border-color: aqua;
+  transform: scale(1.7,1);
+  
+}
+
+/* ẢNH ĐẠI DIỆN */
+.intro-Background img {
+  width: 25vw;            
+  height: 25vw;             
+  border-radius: 50%;
+  object-fit: cover;
+  float: right;
+  margin-right: 10vw;
+  margin-top: 15vh;
+  margin-bottom: 5vh;
+  border: 0.4vh solid white;
+  box-shadow: 0 0 2vw rgba(19, 20, 20, 0.7);
+  transition: all 0.6s ease;
+  filter: drop-shadow(1px 1px 20px rgb(199, 199, 211));
+}
+
+img:hover {
+  border-color: rgb(15, 75, 75);
+  transform: scale(1.1);
+}
+
+/* PHẦN VĂN BẢN */
+.p1 {
+  text-align: left;
+  font-size: 35px;
+  color:  rgba(255, 255, 255, 0.733);
+  margin-left: 10vw;
+  margin-top: 20vh;
+  width: 40vw;
+}
+
+.p2{
+  margin-top: 0.4vh;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 45px;
+  color:  white;
+  margin-left: 10vw;
+  width: 40vw;
+  font-weight: bold;
+  white-space: nowrap;           /* Không xuống dòng */
+  overflow: hidden;              /* Ẩn phần chưa hiện */
+  border-right: 5px solid white; /* Giả con trỏ nhấp nháy */
+  width: 0;                      /* Bắt đầu ẩn hết */
+  animation: typing 3s steps(40, end) forwards, blink 0.8s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0; }
+  to { width: 22vw; } /* Độ dài hiển thị, chỉnh cho vừa dòng của bạn */
+}
+
+/* Hiệu ứng nháy con trỏ */
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: white; }
+}
+.p3{
+  margin-top: 1vh;
+  line-height: 5.5vh;
+  margin-left: 10vw;
+  font-size: 25px;
+  color: white;
+  width: 60vw;
+}
+button{
+  padding: 1.3vh 1.5vw;
+  border: 1px solid  rgb(74, 147, 150);
+  border-radius: 30px;
+  font-size: 20px;
+  text-shadow: none;
+  background: rgb(74, 147, 150);
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: transparent;
+  margin-left: 20vw;
+  margin-top: 5vh;
+  filter: drop-shadow(1px 1px 20px rgb(208, 208, 231));
+  
+}
+button a{
+  text-decoration: none;
+  color: inherit;
+}
+button:hover{
+  transition: transform 0.5s ease;
+  transform: scale(1.1);
+}
+
+.scroll-top {
+  position: fixed; /* Cố định góc màn hình */
+  bottom: 40px; /* Cách mép dưới 40px */
+  right: 30px; /* Cách mép phải 40px */
+  z-index: 999; /* Luôn nằm trên cùng */
+
+  background-color: aqua; /* Nền xanh ngọc */
+  color: white; /* Chữ trắng */
+  text-decoration: none; /* Bỏ gạch chân */
+  font-size: 21px; /* Cỡ chữ/icon */
+  font-weight: bold; /* Chữ đậm */
+  
+  width: 45px; height: 45px; /* Kích thước nút */
+  border-radius: 50%; /* Bo tròn */
+  display: flex; justify-content: center; align-items: center; /* Căn giữa nội dung */
+  box-shadow: 0 0 15px black; /* Bóng đổ đen */
+  transition: all 0.3s ease; /* Hiệu ứng mượt */
+  opacity: 0.7; /* Trong nhẹ */
+}
+
+.scroll-top:hover {
+  opacity: 1; /* Rõ hơn khi hover */
+  transform: scale(1.1); /* Phóng to nhẹ */
+}
+
+
+
+/* Back ground cho about*/
+
+.about-Background{
+  background-color: rgba(0, 0, 0, 0.666);
+  height: 100vh;
+  color: white;
+  
+}
+
+.about-Background .h1{
+  font-size: 50px;
+  font-weight: bold;
+  color: aqua;
+  padding-top: 15vh;
+  padding-left: 15vw;
+}
+
+.about-Background p{
+  font-size: 18px;
+  line-height: 1.6;
+  width: 980px;
+  margin-left: 4vw;
+  margin-top: 5vh;
+}
+/* Slideshow ảnh lớn */
+.about-Background .about-images {
+  position: relative;/* Định vị tương đối */
+  width: 400px;
+  height: 500px;
+  margin-left: 1100px;
+  margin-top: -350px;
+}
+
+.about-Background .about-images img {
+  position: absolute;/*Định vị tuyệt đối phần tử.*/
+  top: 19px;
+  left: 0;
+  width: 320px;
+  height: 360px;
+  border-radius: 30px;
+  object-fit: cover;/*lấp đầy khung mà không méo.*/
+  opacity: 0;/*Làm phần tử trong suốt hoàn toàn*/
+  transform: scale(0.95);/*Thu nhỏ phần tử còn 95% kích thước gốc.*/
+  transition: all 0.5s ease;/*lấp đầy khung mà không méo.*/
+  filter: drop-shadow(1px 1px 20px rgb(199, 199, 211));
+  z-index: 1;/*Quy định thứ tự lớp*/
+}
+.about-Background .about-images img.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 5;
+}
+.about-Background .about-images img.active:hover {
+  transform: scale(1.05); /* phóng to 5% */
+  transition: transform 0.5s ease;
+  cursor: pointer; /* thay đổi con trỏ chuột */
+}
+
+/* Nút Next / Prev */
+.about-images button.prev,
+.about-images button.next {
+  position: absolute;
+  top: 43%;
+  transform: translateY(-50%);/*di chuyển phần tử lên trên 50% chiều cao */
+  background-color: rgba(71, 69, 69, 0.103);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 5px;
+  user-select: none;
+  margin-top: -5px;
+}
+
+.about-images button.prev {
+  left: -363px; /* bên trái ảnh */
+}
+
+.about-images button.next {
+  right: 37px; /* bên phải ảnh */
+}
+
+.about-images button:hover {
+
+  color: black;
+}
+/* chỉnh chữ target*/
+.about-Background h2{
+   margin-left: 55px;
+   font-size: 25px;
+   margin-top: -130px;
+   color: aqua;
+}
+/* Target*/
+.target {
+  margin-top: 12px;
+  padding: 15px 15px;
+  border-left: 5px solid aqua;       /* chỉ viền trái dày 5px */
+  border-top: none;                 /* bỏ các cạnh khác */
+  border-right: 5px solid aqua;
+  border-bottom: none;
+  border-radius: 10px;        
+  width: 76vw;                
+  margin-left: 55px;
+  background-color: rgba(255, 255, 255, 0.1); 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);    
+  transition: all 0.3s ease;
+}
+.target:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* nền sáng hơn */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);     /* nổi mạnh hơn */
+  transform: translateY(-1px);               /* nâng lên 1 chút */
+}
+.target p {
+  width: 100%; 
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 5px 0;
+  color: white;              
+}
+
+/* background cho My hobby*/
+.my-Hobby{
+height: 100vh;
+background-color: rgba(0, 0, 0, 0.753);
+}
+.my-Hobby h1{
+   font-size: 50px;
+  font-weight: bold;
+  color: aqua;
+  padding-top: 15vh;/* đẩy nội dung cách trên 15% chiều cao màn hình */
+  text-align: center; /* canh giữa nội dung */
+}
+.box-hobby1{
+  margin-top: 10vh;
+  margin-left: 3vw;
+  text-align: center; /* canh giữa nội dung bên trong */
+  width: 20vw;
+  height: 40vh;
+  border-radius: 20px;
+  background: linear-gradient(230deg, rgba(0, 0, 0, 0.753),rgba(48, 45, 45, 0.4));
+  box-shadow: -5px 5px 10px rgb(172, 172, 212), 5px -5px 10px black;
+}
+
+.box-hobby1:hover{
+  transform: scale(1.1); /* phóng to nhẹ khi di chuột vào */
+  transition: all 0.5s ease;/* hiệu ứng mượt trong 0.5s */
+}
+.box-hobby1 h3{
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 3vh; 
+  color: rgb(23, 133, 133);
+}
+.box-hobby1 p{
+  padding-top: 0.5vh;/* cách trên nhỏ */
+  font-size: 13px;
+  line-height: 3vh;
+  margin-left: 10px;
+  color: white;
+}
+/* class box-hobby2*/
+.box-hobby2{
+  margin-top:-40.55vh;
+  margin-left: 27vw;
+  text-align: center;
+  width: 20vw;
+  height: 40vh;
+  border-radius: 20px;
+  background: linear-gradient(230deg,rgba(48, 45, 45, 0.4), rgba(0, 0, 0, 0.753) );
+  box-shadow: 5px -5px 10px rgb(172, 172, 212), -5px 5px 10px black;/* Tạo hai bóng đổ: 
+   - Bóng sáng hơi xanh tím ở góc phải trên (5px -5px)
+   - Bóng tối màu đen ở góc trái dưới (-5px 5px)
+Hiệu ứng nổi khối, sáng–tối tự nhiên hơn */
+}
+.box-hobby2:hover{
+  transform: scale(1.1);
+  transition: all 0.5s ease;
+}
+.box-hobby2 h3{
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 3vh; 
+  color: rgb(23, 133, 133);
+}
+.box-hobby2 p{
+  padding-top: 3.5vh;
+  font-size: 13px;
+   line-height: 3vh;
+  margin-left: 10px;
+  color: white;
+}
+/* box-hobby3*/
+.box-hobby3{
+   margin-top:-40.55vh;
+  margin-left:51vw;
+  text-align: center;
+  width: 20vw;
+  height: 40vh;
+  border-radius: 20px;
+ background: linear-gradient(230deg, rgba(0, 0, 0, 0.753),rgba(48, 45, 45, 0.4));
+  box-shadow: -5px 5px 10px rgb(172, 172, 212), 5px -5px 10px black;
+}
+.box-hobby3:hover{
+  transform: scale(1.1);
+  transition: all 0.5s ease;
+}
+.box-hobby3 h3{
+   font-size: 30px;
+  font-weight: bold;
+  padding-top: 3vh; 
+  color: rgb(23, 133, 133);
+}
+.box-hobby3 p {
+  padding-top: 3.5vh;
+  font-size: 13px;
+   line-height: 3vh;
+  margin-left: 10px;
+  color: white;
+}
+/* box-hobby4*/
+.box-hobby4{
+   margin-top:-40.55vh;
+  margin-left:75vw;
+  text-align: center;
+  width: 20vw;
+  height: 40vh;
+  border-radius: 20px;
+  background: linear-gradient(230deg,rgba(48, 45, 45, 0.4), rgba(0, 0, 0, 0.753) );
+  box-shadow: 5px -5px 10px rgb(172, 172, 212), -5px 5px 10px black;
+}
+.box-hobby4:hover{
+  transform: scale(1.1);
+  transition: all 0.5s ease;
+}
+.box-hobby4 h3{
+  padding-top: 3vh;
+  color: rgb(23, 133, 133);
+  font-size:30px ;
+  font-weight: bold;
+}
+.box-hobby4 p {
+  padding-top: 3.5vh;
+  font-size: 13px;
+  line-height: 3vh;
+  margin-left: 10px;
+  color: white;
+}
+/* Background SKILL*/
+.skill{
+  height: 100vh;
+   background-color: rgba(0, 0, 0, 0.666);
+}
+.skill h1{
+   font-size: 50px;
+  font-weight: bold;
+  color: aqua;
+  padding-top: 15vh;
+  text-align: center;
+}
+/* tạo hình tròn*/
+.skill .h3{
+  margin-top: 3vh;
+  margin-bottom: 6vh;
+  margin-left: 13vw;
+  font-size: 35px;
+  color: white;
+  font-weight: bold;
+  filter: drop-shadow(1px 1px 20px rgba(95, 255, 255, 0.8)); /* tạo ánh sáng nhẹ xanh ngọc cho chữ */
+}
+
+.circle-row {
+  display: flex;
+  gap: 160px; /* khoảng cách 2 circle */
+  margin-bottom: 10px;
+  padding-left: 90px;
+}
+
+.circle {
+  width: 120px; 
+  height: 120px; 
+  border-radius: 50%; 
+  background: conic-gradient(
+    #00ffff 0% 60%, 
+    rgb(75, 73, 73) 55% 100%
+  ); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  position: relative; 
+  transition: all 0.6s ease;
+}
+
+.circle::before { 
+  content: attr(data-percent);
+  position: absolute; 
+  width: 85%; 
+  height: 85%; 
+  background: rgb(75, 73, 73); 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-weight: bold; 
+  font-size: 20px; 
+  color: white;
+}
+
+.circle:hover {
+  transform: scale(1.1); /* phóng to nhẹ khi rê chuột */
+  filter: brightness(1.2); /* tăng độ sáng */
+  box-shadow: 0 0 7px rgb(75, 233, 233); /* ánh sáng xanh quanh vòng tròn */
+}
+
+.labels-row {
+  display: flex;
+  gap: 160px; /* trùng với gap circle */
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+.labels-row p {
+  width: 120px; /* khớp với circle */
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  white-space: nowrap; /* không xuống dòng */
+  margin-left: 30px;
+  font-size: 18px;
+  margin-top: 10px;
+}
+.labels-row .team-work{
+  margin-left: 6%;   
+}
+.labels-row .presentation-skills{
+  margin-left: -1.5%;  
+}
+.labels-row .communication-skills{
+  margin-left: 3%; 
+}
+.labels-row .time-management-skills{
+  margin-left: -0.5%; 
+}
+/* Tạo khung cho thanh ngang*/
+.skill-bar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* chữ + thanh nằm sát phải section */
+  gap: 70px;
+  margin-top: -497.5px;
+  padding-right: 140px; /* cách lề phải 20px */
+  box-sizing: border-box; /* đảm bảo padding không phá width */
+}
+
+/* tiêu đề */
+.skill-title {
+  font-size: 35px;
+  color: white;
+  font-weight: bold;
+  filter: drop-shadow(1px 1px 20px rgba(95, 255, 255, 0.8));
+  margin: 0;
+  margin-right: 54px;
+}
+
+/* thanh ngang */
+.background-thanh-ngang {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;            
+    width: 100%;
+    max-width: 450px;
+}
+
+.thanh-full {
+    display: flex;
+    width: 100%;
+    height: 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgb(53, 53, 53);
+    transition: transform 0.4s ease;
+}
+
+.thanh-full:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+    box-shadow: 0 0 7px rgb(75, 233, 233);
+}
+
+.thanh-ngang {
+    background-color: rgb(75, 233, 233);
+    color: rgb(43, 38, 38);
+    text-align: center;
+    line-height: 16px;
+    font-weight: bold;
+    border-radius: 10px; 
+    font-size: 14px;
+    box-shadow: 0 0 20px rgba(95, 255, 255, 1), 
+    ;
+    transition: width 1s ease;
+}
+
+.thanh-empty { 
+    background-color: rgb(75, 73, 73);
+}
+
+/*Contact*/
+/* ------------------ CONTACT SECTION ------------------ */
+.contact {
+  position: relative;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.753);
+}
+
+.contact h1 {
+  font-size: 50px;
+  font-weight: bold;
+  color: aqua;
+  padding-top: 30vh;
+  text-align: center;
+}
+
+/* ------------------ ICON LIST ------------------ */
+.icon li {
+  border: 2px solid white;
+  display: inline-block; /* hiển thị dạng khối nhưng nằm ngang */
+  border-radius: 10px;
+  padding: 10px 20px; 
+  width: fit-content;
+  position: relative;
+  top: 100px; 
+  left: 180px; 
+  font-size: 25px;
+  color: white;
+  box-shadow: -10px 8px 3px; /* tạo bóng nhẹ */
+  filter: drop-shadow(1px 1px 20px rgb(199, 199, 211)); /* hiệu ứng bóng sáng */
+  transition: all 0.3s ease;
+}
+
+.icon li:hover {
+  transform: scale(1.1);
+}
+
+.icon a {
+  text-decoration: none; /* bỏ gạch chân link */
+  color: inherit; 
+}
+
+.icon i {
+  margin-right: 8px; 
+  transition: color 0.1s ease;
+}
+
+/* ------------------ FACEBOOK ------------------ */
+.icon li.facebook {
+  border-color: white;
+  color: white;
+}
+.icon li.facebook:hover {
+  border-color: #1877F2;
+  color: #1877F2;
+  box-shadow: 0 0 15px #1877F2;
+}
+
+/* ------------------ INSTAGRAM ------------------ */
+.icon li.instagram {
+  border-color: white;
+  color: white;
+}
+.icon li.instagram:hover {
+  border-color: #E1306C;
+  color: #E1306C;
+  box-shadow: 0 0 15px #E1306C;
+}
+
+/* ------------------ YOUTUBE ------------------ */
+.icon li.youtube {
+  border-color: white;
+  color: white;
+}
+.icon li.youtube:hover {
+  border-color: #FF0000;
+  color: #FF0000;
+  box-shadow: 0 0 15px #FF0000;
+}
+
+/* ------------------ GITHUB ------------------ */
+.icon li.github {
+  border-color: white;
+  color: white;
+}
+.icon li.github:hover {
+  border-color: #C0C0C0;
+  color: #C0C0C0;
+  box-shadow: 0 0 15px #C0C0C0;
+}
+
+
+.footer{
+text-align: center;
+  color: white;
+  padding: 0.5vh;/* khoảng cách bên trong 0.5% chiều cao màn hình */
+  background-color: rgb(49, 48, 48);
+  font-size: 11px;
+  position: relative; 
+  bottom: 0;/* cách đáy 0 (so với vị trí gốc) */
+  left: 0;/* cách trái 0 */
+  width: 100%;
+  margin-top: 50vh; 
+}
+
+
+
